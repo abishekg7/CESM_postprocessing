@@ -27,8 +27,9 @@
       <module>export NCARG_ROOT=/scratch/group/ihesp/software/share/ncl-6.6.2</module>
       <module>export NCO_PATH=/scratch/group/ihesp/software/share/nco-4.9.4/nco-4.9.7/install</module>
       <module>export NETCDF4_PATH=/scratch/group/ihesp/software/share/netcdf-c-4.7.4/install2019b_2</module>
-      <module>export LD_LIBRARY_PATH=$NCARG_ROOT/lib:$NCO_PATH/lib:$NETCDF4_PATH/lib:$LD_LIBRARY_PATH</module>
-      <module>export PATH=$NCARG_ROOT/bin:$NCO_PATH/bin:$NETCDF4_PATH/bin:$PATH</module>
+      <module>export NETCDFF_PATH=/scratch/group/ihesp/software/share/netcdf-fortran-4.5.3/install2019b_2</module>
+      <module>export LD_LIBRARY_PATH=$NCARG_ROOT/lib:$NCO_PATH/lib:$NETCDF4_PATH/lib:$NETCDFF_PATH/lib:$LD_LIBRARY_PATH</module>
+      <module>export PATH=$NCARG_ROOT/bin:$NCO_PATH/bin:$NETCDF4_PATH/bin:$NETCDFF_PATH/bin:$PATH</module>
       <module>export PYTHONPATH=/scratch/group/iheso/software/CESM_postprocessing/cesm-env2/lib/python2.7/site-packages/PyNIO:$PYTHONPATH</module>
 <!--      <module>ml NCL/6.6.2-foss-2018b</module>
                 <module>ml NCO/4.7.9-foss-2018b</module>

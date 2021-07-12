@@ -21,41 +21,67 @@ begin
   daysperm = (/31.,28.,31.,30.,31.,30.,31.,31.,30.,31.,30.,31./)
   midmonth = (/15.5,45.,74.5,105.,135.5,166.,196.5,227.5,258.,288.5,319.,349.5/)
 
-  out_name = (/ "diagts_transport.drake", \
-               "diagts_transport.mozam", \
-               "diagts_transport.bering", \
-               "diagts_transport.nwpassage", \
-               "diagts_transport.itf1", \
-               "diagts_transport.itf2", \
-               "diagts_transport.florida", \
-               "diagts_transport.windward1", \
-               "diagts_transport.windward2", \
-               "diagts_transport.gibraltar", \
-               "diagts_transport.nares" /)
+  if ( (resolution .eq. "tx0.1v2") .or. (resolution .eq. "tx0.1v3") )then
+    out_name = (/ "diagts_transport.drake", \
+                 "diagts_transport.mozam", \
+                 "diagts_transport.bering", \
+                 "diagts_transport.itf", \
+                 "diagts_transport.florida", \
+                 "diagts_transport.windward", \
+                 "diagts_transport.gibraltar" /)
 
-  in_name = (/ "transports.drake",\
-               "transports.mozambique", \
-               "transports.bering", \
-               "transports.nwpassage",\
-               "transports.itf1", \
-               "transports.itf2", \
-               "transports.florida", \
-               "transports.windward1", \
-               "transports.windward2", \
-               "transports.gibraltar", \
-               "transports.nares" /)
-                    
-  title_prefix = (/"Drake Passage", \
-                   "Mozambique Channel", \
-                   "Bering Strait", \
-                   "Northwest Passage", \
-                   "Indonesian Throughflow I", \
-                   "Indonesian Throughflow II", \
-                   "Florida Strait", \
-                   "Windward Passage I", \
-                   "Windward Passage II", \
-                   "Gibraltar", \
-                   "Nares Strait" /)
+    in_name = (/ "transports.drake",\
+                 "transports.mozambique", \
+                 "transports.bering", \
+                 "transports.itf", \
+                 "transports.florida", \
+                 "transports.windward", \
+                 "transports.gibraltar" /)
+
+    title_prefix = (/"Drake Passage", \
+                     "Mozambique Channel", \
+                     "Bering Strait", \
+                     "Indonesian Throughflow", \
+                     "Florida Strait", \
+                     "Windward Passage", \
+                     "Gibraltar" /)
+  else
+    out_name = (/ "diagts_transport.drake", \
+                 "diagts_transport.mozam", \
+                 "diagts_transport.bering", \
+                 "diagts_transport.nwpassage", \
+                 "diagts_transport.itf1", \
+                 "diagts_transport.itf2", \
+                 "diagts_transport.florida", \
+                 "diagts_transport.windward1", \
+                 "diagts_transport.windward2", \
+                 "diagts_transport.gibraltar", \
+                 "diagts_transport.nares" /)
+
+    in_name = (/ "transports.drake",\
+                 "transports.mozambique", \
+                 "transports.bering", \
+                 "transports.nwpassage",\
+                 "transports.itf1", \
+                 "transports.itf2", \
+                 "transports.florida", \
+                 "transports.windward1", \
+                 "transports.windward2", \
+                 "transports.gibraltar", \
+                 "transports.nares" /)
+
+    title_prefix = (/"Drake Passage", \
+                     "Mozambique Channel", \
+                     "Bering Strait", \
+                     "Northwest Passage", \
+                     "Indonesian Throughflow I", \
+                     "Indonesian Throughflow II", \
+                     "Florida Strait", \
+                     "Windward Passage I", \
+                     "Windward Passage II", \
+                     "Gibraltar", \
+                     "Nares Strait" /)
+  end if
 
   ;          
   ; this processing assumes all ascii files have a single line header

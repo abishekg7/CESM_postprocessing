@@ -228,13 +228,13 @@ export FC=gfortran F77=gfortran CC=gcc
 export PYTHONPATH=$pp_dir/cesm-env2/lib/python2.7/site-packages
 export PYNIOPATH=$pp_dir/cesm-env2/lib/python2.7/site-packages/PyNIO
 export HAS_NETCDF4=1
-export NETCDF4_PREFIX="/sw/eb/software/netCDF/4.6.1-foss-2018b-cdf5/"
+export NETCDF4_PREFIX="/scratch/group/ihesp/software/share/netcdf-c-4.7.4/install2019b_2/"
 export HAS_HDF5=1
-export HDF5_PREFIX="/sw/eb/software/HDF5/1.10.2-foss-2018b/"
+export HDF5_PREFIX="/sw/eb/sw/HDF5/1.10.5-iimpi-2019b"
 export F2CLIBS=gfortran
-export F2CLIBS_PREFIX="/software/easybuild/software/GCCcore/6.3.0/bin/gfortran"
+export F2CLIBS_PREFIX="/sw/eb/sw/GCCcore/8.3.0/bin/gfortran"
 
-
+export NETCDF_PREFIX=/scratch/group/ihesp/software/share/netcdf-c-4.7.4/install2019b_2
 rm -rf pynio ASAPPyTools 
 git clone https://github.com/NCAR/pynio.git
 cd pynio

@@ -15,6 +15,7 @@ import shutil
 import subprocess
 import sys
 import time
+from timeout_mod import timeout, TimeoutError
 
 from cesm_utils import cesmEnvLib
 
@@ -40,8 +41,11 @@ def check_ncl_nco(envDict):
 
     cmd = ['ncks', '--version']
     try:
-        pipe = subprocess.Popen(cmd , env=envDict)
-        pipe.wait()
+        with timeout(seconds=900):
+            pipe = subprocess.Popen(cmd , env=envDict)
+            pipe.wait()
+    except TimeoutError:
+        print("WARNING: timeout at "+__file__)
     except OSError as e:
         print('NCO ncks is required to run the ocean diagnostics package')
         print('ERROR: {0} call to "{1}" failed with error:'.format('check_ncl_nco', ' '.join(cmd)))
@@ -65,11 +69,14 @@ def generate_ncl_plots(env, nclPlotFile):
     rc, err_msg = cesmEnvLib.checkFile(nclFile, 'read')
     if rc:
         try:
-            pipe = subprocess.Popen(['ncl {0}'.format(nclFile)], cwd=env['WORKDIR'], env=env, shell=True, stdout=subprocess.PIPE)
-            output = pipe.communicate()[0]
-            print('NCL routine {0} \n {1}'.format(nclFile,output))            
-            while pipe.poll() is None:
-                time.sleep(0.5)
+            with timeout(seconds=900):
+                pipe = subprocess.Popen(['ncl {0}'.format(nclFile)], cwd=env['WORKDIR'], env=env, shell=True, stdout=subprocess.PIPE)
+                output = pipe.communicate()[0]
+                print('NCL routine {0} \n {1}'.format(nclFile,output))
+                while pipe.poll() is None:
+                    time.sleep(0.5)
+        except TimeoutError:
+            print("WARNING: timeout at "+__file__)
         except OSError as e:
             print('WARNING',e.errno,e.strerror)
     else:
@@ -200,12 +207,11 @@ def checkHistoryFiles(tseries, dout_s_root, case, rstart_year, rstop_year, comp,
     """
     if tseries.upper() in ['T','TRUE'] :
         htype = 'series'
+##        in_dir = '{0}/{1}/proc/tseries/month_1'.format(dout_s_root, comp)
     else :
         htype = 'slice'
+##        in_dir = '{0}/{1}/hist'.format(dout_s_root, comp)
 
-    # make sure subdir does not include a trailing "/"
-    if subdir.endswith('/'):
-        subdir = subdir[:-1]
     in_dir = '{0}/{1}/{2}'.format(dout_s_root, comp, subdir)
 
     # check the in_dir directory exists 
@@ -499,7 +505,6 @@ def lnd_regrid(climo_file, regrid_script, t, outdir, ext_dir, env):
     env['area_file']= env['new_res_'+t]+'_area.nc' 
     env['procDir']  = tmp_outdir
     env['oldres']   = env['old_res_'+t]
-    env['newres']   = env['new_res_'+t]
     env['InFile']   = os.path.basename(climo_file)
     env['OutFile']  = env['new_res_'+t]+'_'+os.path.basename(climo_file)
     env['newfn']    = env['old_res_'+t]+'_'+os.path.basename(climo_file)

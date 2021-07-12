@@ -2,8 +2,12 @@
 
 echo "Loading modules for CESM_postprocessing tool..."
 
-module purge
+
+ml purge
+export MODULEPATH=/scratch/group/ihesp/software/easybuild/eb/x86_64/mods/all/Core
 ml intel/2019b
+ml NCO
+ml NCL
 ml ANTLR
 ml HDF5
 #ml NCL/6.6.2
@@ -11,12 +15,12 @@ ml HDF5
 #ml netCDF/4.6.1
 ml Python/2.7.16
 
-export NCARG_ROOT=/scratch/group/ihesp/software/share/ncl-6.6.2
-export NCO_PATH=/scratch/group/ihesp/software/share/nco-4.9.4/nco-4.9.7
-export NETCDF4_PATH=/scratch/group/ihesp/software/share/netcdf-c-4.7.4/install2019b_2
-export LD_LIBRARY_PATH=$NCARG_ROOT/lib:$NCO_PATH/lib:$NETCDF4_PATH/lib:$LD_LIBRARY_PATH
-export PATH=$NCARG_ROOT/bin:$NCO_PATH/bin:$NETCDF4_PATH/bin:$PATH
-
+#export NCARG_ROOT=/scratch/group/ihesp/software/share/ncl-6.6.2
+#export NCO_PATH=/scratch/group/ihesp/software/share/nco-4.9.4/nco-4.9.7
+#export NETCDF4_PATH=/scratch/group/ihesp/software/share/netcdf-c-4.7.4/install2019b_2
+#export NETCDFF_PATH=/scratch/group/ihesp/software/share/netcdf-fortran-4.5.3/install2019b_2
+#export LD_LIBRARY_PATH=$NCARG_ROOT/lib:$NCO_PATH/lib:$NETCDF4_PATH/lib:$NETCDFF_PATH/lib:$LD_LIBRARY_PATH
+#export PATH=$NCARG_ROOT/bin:$NCO_PATH/bin:$NETCDF4_PATH/bin:$NETCDFF_PATH/bin:$PATH
 
 #source /ihesp/user/agopal/CESM_postprocessing/cesm-env2/bin/activate
 #export PYTHONPATH=/ihesp/user/agopal/CESM_postprocessing/pynio/site-packages:$PYTHONPATH
